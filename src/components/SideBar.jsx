@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Users } from "lucide-react";
 import { Image } from "lucide-react";
 import { Ellipsis } from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 const SideBar = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
+  const [showWanted, setShowWanted] = useState(false);
+
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -34,17 +39,29 @@ const SideBar = () => {
       <div className="flex flex-col h-full gap-12">
         <div className=" flex items-center justify-center text-white ">
           {isHovered ? (
-            <div className="flex gap-2 items-center cursor-pointer">
-              <Users size={24} />
-              <button
-                className={` flex gap-2 items-center cursor-pointer font-semibold text-sm uppercase transition-all ease-in ${
-                  isHovered
-                    ? "opacity-100 duration-700"
-                    : "opacity-0 duration-0"
+            <div className="flex cursor-pointer flex-col">
+              <div className="flex items-center gap-2">
+                <Users size={24} />
+                <button
+                  onClick={() => setDropDown(!dropDown)}
+                  className={` whitespace-nowrap flex gap-2 items-center cursor-pointer font-semibold text-sm uppercase transition-all ease-in ${
+                    isHovered
+                      ? "opacity-100 duration-700"
+                      : "opacity-0 duration-0"
+                  }`}
+                >
+                  Most Wanted
+                  {dropDown ? <ChevronDown /> : <ChevronRight />}
+                </button>
+              </div>
+              <div
+                className={`flex flex-col mt-4 gap-4 ${
+                  dropDown ? "block" : "hidden"
                 }`}
               >
-                Fugitives
-              </button>
+                <Link to="/wanted">Top Ten</Link>
+                <button>Test</button>
+              </div>
             </div>
           ) : (
             <Users
