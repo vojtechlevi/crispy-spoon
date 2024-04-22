@@ -10,13 +10,17 @@ import { ChevronDown } from "lucide-react";
 const SideBar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+
   const [artDropDown, setArtDropDown] = useState(false);
   const [showWanted, setShowWanted] = useState(false);
+
 
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false), setDropDown(false);
+      }}
       className={`bg-black/70 h-full flex flex-col text-center absolute top-0 left-0 transition-all duration-200 ease-in-out ${
         isHovered ? " w-56" : " w-16"
       }`}
@@ -60,8 +64,8 @@ const SideBar = () => {
                   dropDown ? "block" : "hidden"
                 }`}
               >
-                <Link to="/wanted">Top Ten</Link>
-                <button>Test</button>
+                <Link to="/topten">Top Ten</Link>
+                <Link to="/terrorist">Terrorists</Link>
               </div>
             </div>
           ) : (
