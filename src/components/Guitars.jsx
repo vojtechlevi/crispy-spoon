@@ -1,4 +1,5 @@
 import { useArt } from "../hooks/useArt";
+import { Card } from "./Card";
 
 export const Guitars = () => {
   const { guitars } = useArt();
@@ -13,22 +14,14 @@ export const Guitars = () => {
       <div className="flex flex-wrap gap-4">
         {guitars.map((guitar) => {
           return (
-            <div
+            <Card
               key={guitar.title}
-              className="text-white w-1/4 flex flex-col gap-4 bg-white bg-opacity-20 rounded-lg p-4"
-            >
-              <div>
-                <h2>{guitar.title}</h2>
-                <p>{guitar.maker}</p>
-                <p>{guitar.period}</p>
-              </div>
-              <img
-                style={{ maxWidth: "150px" }}
-                src={guitar.images[0].original}
-                alt=""
-              />
-              <p>{guitar.description}</p>
-            </div>
+              title={guitar.title}
+              maker={guitar.maker}
+              period={guitar.period}
+              imgUrl={guitar.images[0].original}
+              description={guitar.description}
+            ></Card>
           );
         })}
       </div>

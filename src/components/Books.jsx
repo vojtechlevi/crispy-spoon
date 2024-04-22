@@ -1,4 +1,5 @@
 import { useArt } from "../hooks/useArt";
+import { Card } from "./Card";
 
 export const Books = () => {
   const { books } = useArt();
@@ -13,22 +14,14 @@ export const Books = () => {
       <div className="flex flex-wrap gap-4">
         {books.map((book) => {
           return (
-            <div
+            <Card
               key={book.title}
-              className="text-white w-1/4 flex flex-col gap-4 bg-white bg-opacity-20 rounded-lg p-4"
-            >
-              <div>
-                <h2>{book.title}</h2>
-                <p>{book.maker}</p>
-                <p>{book.period}</p>
-              </div>
-              <img
-                style={{ maxWidth: "150px" }}
-                src={book.images[0].original}
-                alt=""
-              />
-              <p>{book.description}</p>
-            </div>
+              title={book.title}
+              maker={book.maker}
+              period={book.period}
+              imgUrl={book.images[0].original}
+              description={book.description}
+            ></Card>
           );
         })}
       </div>
