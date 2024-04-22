@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-const url = "https://api.fbi.gov/wanted/v1/list";
-
-export const useFugitives = () => {
+export const useFugitives = (url) => {
   const [fugitives, setFugitives] = useState([]);
 
   useEffect(() => {
