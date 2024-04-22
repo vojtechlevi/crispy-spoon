@@ -1,4 +1,5 @@
 import { useArt } from "../hooks/useArt";
+import { Card } from "./Card";
 
 export const Crucifix = () => {
   const { crucifix } = useArt();
@@ -13,22 +14,14 @@ export const Crucifix = () => {
       <div className="flex flex-wrap gap-4">
         {crucifix.map((crucifix) => {
           return (
-            <div
+            <Card
               key={crucifix.title}
-              className="text-white w-1/4 flex flex-col gap-4 bg-white bg-opacity-20 rounded-lg p-4"
-            >
-              <div>
-                <h2>{crucifix.title}</h2>
-                <p>{crucifix.maker}</p>
-                <p>{crucifix.period}</p>
-              </div>
-              <img
-                style={{ maxWidth: "150px" }}
-                src={crucifix.images[0].original}
-                alt=""
-              />
-              <p>{crucifix.description}</p>
-            </div>
+              title={crucifix.title}
+              maker={crucifix.maker}
+              period={crucifix.period}
+              imgUrl={crucifix.images[0].original}
+              description={crucifix.description}
+            ></Card>
           );
         })}
       </div>
