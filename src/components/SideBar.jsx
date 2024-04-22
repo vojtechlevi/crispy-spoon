@@ -10,6 +10,7 @@ import { ChevronDown } from "lucide-react";
 const SideBar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+  const [artDropDown, setArtDropDown] = useState(false);
   const [showWanted, setShowWanted] = useState(false);
 
   return (
@@ -74,15 +75,31 @@ const SideBar = () => {
         </div>
         <div className=" flex items-center justify-center text-white transition-all duration-500 ease-in">
           {isHovered ? (
-            <div className="flex gap-2 items-center cursor-pointer">
-              <Image size={24} />
-              <button
-                className={` whitespace-nowrap font-semibold text-sm uppercase transition-all duration-100 ease-in ${
-                  isHovered ? "opacity-100" : "opacity-0"
+            <div className="flex cursor-pointer flex-col">
+              <div className="flex items-center gap-2">
+                <Image size={24} />
+                <button
+                  onClick={() => setArtDropDown(!artDropDown)}
+                  className={` whitespace-nowrap flex gap-2 items-center cursor-pointer font-semibold text-sm uppercase transition-all ease-in ${
+                    isHovered
+                      ? "opacity-100 duration-700"
+                      : "opacity-0 duration-0"
+                  }`}
+                >
+                  Stolen Art
+                  {artDropDown ? <ChevronDown /> : <ChevronRight />}
+                </button>
+              </div>
+              <div
+                className={`flex flex-col mt-4 gap-4 ${
+                  artDropDown ? "block" : "hidden"
                 }`}
               >
-                Stolen Art
-              </button>
+                <Link to="/paintings">Paintings</Link>
+                <Link to="/books">Books</Link>
+                <Link to="/crucifix">Crucifix</Link>
+                <Link to="/guitars">Guitars</Link>
+              </div>
             </div>
           ) : (
             <Image size={24} />
