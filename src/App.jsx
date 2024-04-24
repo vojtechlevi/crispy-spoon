@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import Wanted from "./pages/Wanted";
-import FugitiveDetails from "./pages/FugitiveDetails";
 
 import { Paintings } from "./components/Paintings";
 import { Books } from "./components/Books";
