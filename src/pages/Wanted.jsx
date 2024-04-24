@@ -1,32 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import DOMPurify from "dompurify";
 
+import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 import { useFugitives } from "../hooks/useFugitives";
 
-const Wanted = ({ url }) => {
+const Wanted = ({ url, subheading }) => {
   const { fugitives } = useFugitives(url);
+  const [showDetails, setShowDetails] = useState({});
 
   return (
-    <div className="w-full h-full text-white flex flex-col items-center justify-center">
-      <h2 className="text-lg md:text-2xl lg:text-3xl xl:text-4xl font-extrabold">
-        Ten Most Wanted Fugitives
-      </h2>
-      <div className=" grid grid-cols-1 lg:grid-col-3">
+    <div className="h-screen w-full flex flex-col gap-8">
+      <div className=" text-white flex flex-col mt-8 ml-4">
+        <Link to="/" className="mb-4 ">
+          <ChevronLeft />
+        </Link>
+        <h1 className="text-lg md:text-2xl xl:text-4xl font-extrabold">
+          FBI's Most Wanted
+        </h1>
+        <h2>{subheading}</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8   pb-8 px-4 ">
         {fugitives
           .filter((fugitive) => fugitive.images && fugitive.images.length > 0)
           .map((fugitive, index) => {
             return (
               <div
                 key={index}
-                className=" flex flex-col md:flex-row gap-12 m-12 bg-[#0f0f0f] p-4 rounded-lg cursor-pointer text-white"
+                className={`flex flex-col lg:flex-row  rounded-xl items-center justify-center  text-white ${
+                  showDetails[fugitive["@id"]] ? "col-span-4" : ""
+                }`}
               >
-                <div className=" h-full w-full md:min-w-[300px]">
+                <div className="relative h-[550px] bg-white/10 items-center rounded-xl flex flex-col gap-4 ">
                   <img
-                    className="rounded-xl max-h-[300px] w-full"
+                    className="rounded-t-xl  w-[300px] h-[300px]"
                     src={fugitive.images[0].large}
                     alt=""
                   />
-                  <div className="flex-col w-full gap-4 flex mt-4">
+                  <div className=" flex-col gap-2 w-[300px] flex px-4 ">
                     {fugitive &&
                       fugitive.aliases &&
                       fugitive.aliases.length > 0 && (
@@ -49,18 +60,6 @@ const Wanted = ({ url }) => {
                         <p>POB: {fugitive.place_of_birth}</p>
                       )}
                   </div>
-                </div>
-                <div className="hidden md:flex flex-col gap-12">
-                  <p className="">
-                    Caution: <br />
-                    {DOMPurify.sanitize(fugitive.caution, {
-                      ALLOWED_TAGS: [],
-                    }).replace(/&nbsp;/g, " ")}
-                  </p>
-                  <p>
-                    Reward: <br /> {fugitive.reward_text}
-                  </p>
-                  <p>Field Office: {fugitive.field_offices}</p>
                 </div>
               </div>
             );

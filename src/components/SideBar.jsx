@@ -14,7 +14,6 @@ const SideBar = () => {
   const [artDropDown, setArtDropDown] = useState(false);
   const [showWanted, setShowWanted] = useState(false);
 
-
   return (
     <div
       onMouseEnter={() => setIsHovered(true)}
@@ -65,7 +64,7 @@ const SideBar = () => {
                 }`}
               >
                 <Link to="/topten">Top Ten</Link>
-                <Link to="/terrorist">Terrorists</Link>
+                <Link to="/terrorists">Terrorists</Link>
               </div>
             </div>
           ) : (
@@ -112,14 +111,15 @@ const SideBar = () => {
         <div className="w-full flex absolute bottom-5 items-center justify-center text-white transition-all  ease-in">
           {isHovered ? (
             <div className="flex gap-2 items-center cursor-pointer">
-              <button
+              <a
+                href="https://www.fbi.gov/wanted"
                 className={` flex gap-4 items-center  whitespace-nowrap font-semibold text-sm uppercase transition-all duration-100 ease-in ${
                   isHovered ? "opacity-100" : "opacity-0"
                 }`}
               >
                 Read More
                 <ChevronRight size={18} />
-              </button>
+              </a>
             </div>
           ) : (
             <Ellipsis size={24} />
